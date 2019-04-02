@@ -1,28 +1,21 @@
-const { spawn } = require('child_process');
-const request = require('request');
-const test = require('tape');
 
-// Start the app
-const env = Object.assign({}, process.env, {PORT: 5000});
-const child = spawn('node', ['index.js'], {env});
+let chai = require('chai');
+let chaiHttp = require('chai-http');
+const expect = require('chai').expect;
+chai.use(chaiHttp);
+const url= 'http://127.0.0.1:8081';
 
-test('responds to requests', (t) => {
-  t.plan(4);
+describe('login', ()=> {
+    let users;
 
-  // Wait until the server is ready
-  child.stdout.on('data', _ => {
-    // Make a request to our app
-    request('http://127.0.0.1:5000', (error, response, body) => {
-      // stop the server
-      child.kill();
-
-      // No error
-      t.false(error);
-      // Successful response
-      t.equal(response.statusCode, 200);
-      // Assert content checks
-      t.notEqual(body.indexOf("<title>Node.js Getting Started on Heroku</title>"), -1);
-      t.notEqual(body.indexOf("Getting Started with Node on Heroku"), -1);
+    it('should return code 200 and user info', (done)=> {
+	chai.request(url)
+	    .post('/login')
+	    .send({email:"test@1.com", contraseña: "test1"})
+	    .end( function(err, res){
+		console.log(res.body);
+		expect(res).to.have.status(200);
+		done();
+	    });
     });
-  });
-});
+})
