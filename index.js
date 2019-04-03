@@ -28,16 +28,16 @@ var server = (db_name)=>{
 	    users.findOne({"email": new_user.email},(err,index)=>{
 		if(err) throw err;
 		if(index){
-		    sendResponse(res,200,"{resultado: 0}");
+		    sendResponse(res,200,{"resultado": 0});
 		}
 		else{
 		    users.insertOne(new_user, function(err,item ){
 			if(err){
 
-			    sendResponse(res,400, "{message:Ha ocurrido un error}");
+			    sendResponse(res,400, {"message":"Ha ocurrido un error"});
 			}
 			else{
-			    sendResponse(res,200, "{resultado: 1}");
+			    sendResponse(res,200, {"resultado": 1});
 			}
 		    })
 		}
@@ -64,12 +64,22 @@ var server = (db_name)=>{
 		if(err) throw err;
 
 		if(index){
-		    responseMsg = "{  valido: 1, token: 0000000,  nombre:"+ index.nombre + ",  apodo:" + index.apodo +",  email:"+ index.email +"}";
+		    let token = Math.random();
+		    responseMsg = { "valido": 1,
+				    "token": token,
+				    "nombre": index.nombre,
+				    "apodo": index.apodo,
+				    "email":index.email};
+		    
+		    let query = {"email": index.email,
+				 "contraseña": index.contraseña};
+		    
+		    users.update(query, {$set:{"token":token}});
 		    sendResponse(res,200,responseMsg);
 
 		}
 		else{
-		    responseMsg = "{  valido: 0, token:,  nombre:,  apodo:,  email:}";
+		    responseMsg = { "valido": 0, "token": " ",  "nombre": " ",  "apodo":" ",  "email":" "};
 		    sendResponse(res,200,responseMsg);
 		}
 
@@ -80,8 +90,8 @@ var server = (db_name)=>{
     
 
     var sendResponse = function(res,code,message){
-	res.writeHead(code);
-	res.write(message);
+	res.writeHead(code,{"Content-Type":"application/json"})
+	res.write(JSON.stringify(message));
 	res.end();
     }
 
