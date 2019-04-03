@@ -4,10 +4,9 @@ const bodyParser = require('body-parser')
 const http = require('http')
 var mongo = require('mongodb')
 var MongoClient = mongo.MongoClient
-const url = "mongodb://127.0.0.1:27017/";
+//const url = "mongodb://127.0.0.1:27017/";
+const url = process.env.URL 
 var express = require('express');
-
-
 
 var server = (db_name)=>{
     var hypechat = express();

@@ -7,8 +7,9 @@
   },
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "./node_modules/mocha/bin/mocha"
+    "start": "URL=mongodb+srv://hypechat:hypechat@hypechat-5gtp2.mongodb.net/test?retryWrites=true node index.js",
+    "test": "./node_modules/mocha/bin/mocha",
+    "start_local": "URL=mongodb://127.0.0.1:27017 node index.js"
   },
   "dependencies": {
     "async": "^2.6.2",
@@ -19,7 +20,7 @@
     "ejs": "^2.5.6",
     "express": "^4.15.2",
     "mocha": "^6.0.2",
-    "mongodb": "^3.2.2",
+    "mongodb": "^3.2.2"
 
   },
   "devDependencies": {
