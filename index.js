@@ -1,20 +1,22 @@
 const path = require('path')
-const PORT = process.env.PORT || 5000
 const bodyParser = require('body-parser')
 const http = require('http')
 var mongo = require('mongodb')
 var MongoClient = mongo.MongoClient
 //const url = "mongodb://127.0.0.1:27017/";
-const url = process.env.URL 
+var url = process.env.URL 
 var express = require('express');
+var port = process.env.PORT || 5000;
+
+console.log(`Listening on ${ url }:${ port }`);
 
 var server = (db_name)=>{
     var hypechat = express();
     hypechat.use(bodyParser.json());
     var jsonParser = bodyParser.json()
 
-    hypechat.listen(8081);
-    
+    hypechat.listen(port);
+
     var fetchUsers = function(db){
 	let db_hypechat = db.db(db_name);
 	let users = db_hypechat.collection("users");
