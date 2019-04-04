@@ -66,7 +66,10 @@ var server = (db_name)=>{
 
 	MongoClient.connect(url,(err,db)=>{
 	    if (err) sendResponse(res,500,{"message": `Error al conectar la base de datos: ${err}`});
-	    
+	    if(!(new_user.hasOwnProperty('email'))){
+	    	responseMsg = { "valido": 0, "token": " ",  "nombre": " ",  "apodo":" ",  "email":" "};
+		    sendResponse(res,200,responseMsg);
+	    }
 	    var users = fetchUsers(db);
 	    users.findOne({"email": new_user.email, "contraseña": new_user.contraseña},(err,index)=>{
 		if(err) sendResponse(res,500,{"message": `Error al cbuscar email en la base de datos: ${err}`});
