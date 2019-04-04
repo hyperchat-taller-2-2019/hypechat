@@ -24,10 +24,14 @@ var server = (db_name)=>{
     var registerUser = function(new_user,res){
 	MongoClient.connect(url,(err,db)=>{
 	    if (err) sendResponse(res,500,{"message": `Error al conectar la base de datos: ${err}`});
+	    if(!(new_user.hasOwnProperty('email'))){
+	    	sendResponse(res,200,{"resultado": "0 - NO HAY EMAIL"});
+	    }
+
 	    var users = fetchUsers(db);
 	    users.findOne({"email": new_user.email},(err,index)=>{
 		if(err) sendResponse(res,500,{"message": `Error al buscar email en la base de datos: ${err}`});
-		if(index || !(new_user.hasOwnProperty('email'))) {
+		if(index ) {
 		    sendResponse(res,200,{"resultado": 0});
 		}
 		else{
