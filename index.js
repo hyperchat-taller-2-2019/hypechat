@@ -26,24 +26,31 @@ var server = (db_name)=>{
     var registerUser = function(new_user,res){
 	MongoClient.connect(url,(err,db)=>{
 	    if (err) sendResponse(res,500,{"message": `Error al conectar la base de datos: ${err}`});
+	    if(!(new_user.hasOwnProperty('email'))){
+	    	sendResponse(res,200,{"resultado": "0 - NO HAY EMAIL"});
+	    }
+
 	    var users = fetchUsers(db);
 	    users.findOne({"email": new_user.email},(err,index)=>{
 		if(err) sendResponse(res,500,{"message": `Error al buscar email en la base de datos: ${err}`});
-		if(index){n
+
+		if(index ) {
 		    sendResponse(res,200,{"resultado": 0});
 		}
 		else{
-		    users.insertOne(new_user, function(err,item ){
-			if(err){
+			    users.insertOne(new_user, function(err,item ){
+				if(err){
 
-			    sendResponse(res,400, {"message":"Ha ocurrido un error"});
-			}
-			else{
-			    sendResponse(res,200, {"resultado": 1});
-			}
-		    })
+				    sendResponse(res,400, {"message":"Ha ocurrido un error"});
+				}
+				else{
+				    sendResponse(res,200, {"resultado": 1});
+				}
+			    })
+			
 		}
-	    });
+
+		});
 	});
     };
 
@@ -60,7 +67,10 @@ var server = (db_name)=>{
 
 	MongoClient.connect(url,(err,db)=>{
 	    if (err) sendResponse(res,500,{"message": `Error al conectar la base de datos: ${err}`});
-	    
+	    if(!(new_user.hasOwnProperty('email'))){
+	    	responseMsg = { "valido": 0, "token": " ",  "nombre": " ",  "apodo":" ",  "email":" "};
+		    sendResponse(res,200,responseMsg);
+	    }
 	    var users = fetchUsers(db);
 	    users.findOne({"email": new_user.email, "contraseña": new_user.contraseña},(err,index)=>{
 		if(err) sendResponse(res,500,{"message": `Error al cbuscar email en la base de datos: ${err}`});
