@@ -27,21 +27,23 @@ var server = (db_name)=>{
 	    var users = fetchUsers(db);
 	    users.findOne({"email": new_user.email},(err,index)=>{
 		if(err) sendResponse(res,500,{"message": `Error al buscar email en la base de datos: ${err}`});
-		if(index){
+		if(index || !(new_user.hasOwnProperty('email'))) {
 		    sendResponse(res,200,{"resultado": 0});
 		}
 		else{
-		    users.insertOne(new_user, function(err,item ){
-			if(err){
+			    users.insertOne(new_user, function(err,item ){
+				if(err){
 
-			    sendResponse(res,400, {"message":"Ha ocurrido un error"});
-			}
-			else{
-			    sendResponse(res,200, {"resultado": 1});
-			}
-		    })
+				    sendResponse(res,400, {"message":"Ha ocurrido un error"});
+				}
+				else{
+				    sendResponse(res,200, {"resultado": 1});
+				}
+			    })
+			
 		}
-	    });
+
+		});
 	});
     };
 
