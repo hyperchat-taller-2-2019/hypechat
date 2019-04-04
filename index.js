@@ -8,7 +8,7 @@ var url = process.env.URL
 var express = require('express');
 var port = process.env.PORT || 5000;
 
-console.log(`Listening on ${ url }:${ port }`);
+console.log(`Listening on ${ port }`);
 
 var server = (db_name)=>{
     var hypechat = express();
@@ -29,7 +29,7 @@ var server = (db_name)=>{
 	    var users = fetchUsers(db);
 	    users.findOne({"email": new_user.email},(err,index)=>{
 		if(err) sendResponse(res,500,{"message": `Error al buscar email en la base de datos: ${err}`});
-		if(index){
+		if(index){n
 		    sendResponse(res,200,{"resultado": 0});
 		}
 		else{
@@ -106,15 +106,9 @@ var server = (db_name)=>{
 	MongoClient.connect(url, function(err, db){
 	    let users = fetchUsers(db);
 	    users.find({}).toArray(function(err,result) {
-		usersString = "";
+		usersString = ``;
 		for (var i of result){
-
-		    usersString +=
-			"{" + i.nombre +
-			"," + i.apodo + ","
-		    "," + i.email
-			+ ","
-		    "};";
+		    usersString += `{nombre: ${ i.nombre }, email: ${ i.email }, contraseña: ${ i.contraseña }, apodo: ${ i.apodo }  };` ;
 		}
 
 		sendResponse(res,200,usersString);
