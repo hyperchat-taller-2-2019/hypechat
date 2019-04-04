@@ -23,10 +23,10 @@ var server = (db_name)=>{
 
     var registerUser = function(new_user,res){
 	MongoClient.connect(url,(err,db)=>{
-	    if (err) throw err
+	    if (err) sendResponse(res,500,{"message": `Error al conectar la base de datos: ${err}`});
 	    var users = fetchUsers(db);
 	    users.findOne({"email": new_user.email},(err,index)=>{
-		if(err) throw err;
+		if(err) sendResponse(res,500,{"message": `Error al buscar email en la base de datos: ${err}`});
 		if(index){
 		    sendResponse(res,200,{"resultado": 0});
 		}
@@ -48,7 +48,7 @@ var server = (db_name)=>{
 
     var getUser = function(new_user,users){
 	users.findOne({"email": new_user.email},(err,index)=>{
-	    if(err) throw err;
+	    if(err) sendResponse(res,500,{"message": `Error al cbuscar email en la base de datos: ${err}`});
 	    return index;
 	})
     }
@@ -57,11 +57,11 @@ var server = (db_name)=>{
 	let new_user = req.body;
 
 	MongoClient.connect(url,(err,db)=>{
-	    if (err) throw err
+	    if (err) sendResponse(res,500,{"message": `Error al conectar la base de datos: ${err}`});
 	    
 	    var users = fetchUsers(db);
 	    users.findOne({"email": new_user.email, "contraseña": new_user.contraseña},(err,index)=>{
-		if(err) throw err;
+		if(err) sendResponse(res,500,{"message": `Error al cbuscar email en la base de datos: ${err}`});
 
 		if(index){
 		    let token = Math.random();
