@@ -83,14 +83,21 @@ function logIn (req, res) {
 		if (err) return res.status(500).send({ message: `Error al ingresar mail: ${err}` })
 		if (!user) return res.status(200).send(
 			{ message: `El mail o la contraseña son invalidos`, 
-			token: service.createToken(user),
+			token: '',
 			valido: 0,
 			nombre: '',
 			apodo: '',
 			email: '' })
 		
+		let usuarioId = user._id
+		let newToken = service.createToken(user)
+		let update = {token: newToken}
+
+		User.findByIdAndUpdate(usuarioId, update, (err,usuarioUpdated)=>{
+			if(err) res.status(500).send({message:`Error al guardar el token del usuario: ${err}`})
+		})
 		return res.status(200).send({ message: 'Te has logueado correctamente', 
-			token: service.createToken(user),
+			token: newToken,
 			valido: 1,
 			nombre: user.name,
 			apodo: user.apodo,
@@ -111,6 +118,16 @@ function getUserPerfil(req, res) {
 	})
 }
 
+function updateUserPerfil(req, res){
+	let usuarioToken = req.body.token
+	let update = req.body
+	User.update({token: usuarioToken}, update, (err,usuarioUpdated)=>{
+		if(err) res.status(500).send({message:`Error al actualizar el perdil del usuario: ${err}`})
+
+		res.status(200).send({message: 'El perfil se modifico correctamente'})
+	})
+}
+
 module.exports={
 	getUser,
 	getUsers,
@@ -119,5 +136,6 @@ module.exports={
 	deleteUser,
 	signUp,
 	logIn,
-	getUserPerfil
+	getUserPerfil,
+	updateUserPerfil
 }

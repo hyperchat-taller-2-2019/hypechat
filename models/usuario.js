@@ -8,7 +8,8 @@ const UserSchema = new Schema({
 	name: String,
 	psw: {type:String, default:''},//false para que cada vez que nos pidan al usuario no se mande la contraseña
 	photo: String, //guardamos la url de la imagen
-	apodo: String
+	apodo: String,
+	token: String
 	//signupDate: {type: Date, default: Date.now()},
 	//lastLogin: Date
 });
