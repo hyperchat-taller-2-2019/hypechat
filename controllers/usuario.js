@@ -80,22 +80,35 @@ function signUp(req,res){
 
 function logIn (req, res) {
 	User.findOne({ email: req.body.email, psw: req.body.psw }, (err, user) => {
-		if (err) return res.status(500).send({ msg: `Error al ingresar mail: ${err}` })
+		if (err) return res.status(500).send({ message: `Error al ingresar mail: ${err}` })
 		if (!user) return res.status(200).send(
-			{ msg: `El mail o la contraseña son invalidos: ${err}`, 
+			{ message: `El mail o la contraseña son invalidos`, 
 			token: service.createToken(user),
 			valido: 0,
 			nombre: '',
 			apodo: '',
 			email: '' })
 		
-		return res.status(200).send({ msg: 'Te has logueado correctamente', 
+		return res.status(200).send({ message: 'Te has logueado correctamente', 
 			token: service.createToken(user),
 			valido: 1,
 			nombre: user.name,
 			apodo: user.apodo,
 			email: user.email })
 	});
+}
+
+function getUserPerfil(req, res) {
+	User.findOne({email: req.params.email}, (err, user) =>{
+		if(err) return res.status(500).send({message: `Error al buscar informacion del usuario: ${err}`})
+		if(!user) return res.status(400).send({message: 'El usuario solicitado no existe'})
+
+		return res.status(200).send({ nombre: user.name,
+			apodo: user.apodo,
+			email: user.email,
+			foto: user.photo
+		})
+	})
 }
 
 module.exports={
@@ -105,5 +118,6 @@ module.exports={
 	updateUser,
 	deleteUser,
 	signUp,
-	logIn
+	logIn,
+	getUserPerfil
 }

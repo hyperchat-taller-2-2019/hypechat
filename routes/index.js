@@ -9,6 +9,7 @@ api.get('/hola/:name',function(req, res){
 });
 api.get('/usuario', userControllers.getUsers)
 api.get('/usuario/:userId', userControllers.getUser)
+api.get('/consultarPerfil/:email', userControllers.getUserPerfil)
 api.post('/usuario', userControllers.saveUser)
 api.put('/usuario/:userId', userControllers.updateUser )
 api.delete('/usuario/:userId', userControllers.deleteUser )
