@@ -16,8 +16,8 @@ describe('login', ()=> {
 	    .post('/login')
 	    .send({email:"test@2.com", contraseña: "test2"})
 	    .end( function(err, res){
-		console.log((res.body));
 		expect(res).to.have.status(200);
+		console.log((res.body));
 		expect(res.body).to.have.property('valido').to.be.equal(1);
 		done();
 	    });
