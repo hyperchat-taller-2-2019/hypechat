@@ -122,9 +122,9 @@ function updateUserPerfil(req, res){
 	let usuarioToken = req.body.token
 	let update = req.body
 	User.update({token: usuarioToken}, update, (err,usuarioUpdated)=>{
-		if(err) res.status(500).send({message:`Error al actualizar el perdil del usuario: ${err}`})
+		if(err) res.status(500).send({message:`Error al actualizar el perfil del usuario: ${err}`})
 
-		res.status(200).send({message: 'El perfil se modifico correctamente'})
+		res.status(200).send({message: 'El perfil se modificó correctamente'})
 	})
 }
 
