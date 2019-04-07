@@ -13,7 +13,7 @@ api.post('/usuario', userControllers.saveUser)
 api.put('/usuario/:userId', userControllers.updateUser )
 api.delete('/usuario/:userId', userControllers.deleteUser )
 
-api.post('/signup', userControllers.signUp )
+api.post('/registro', userControllers.signUp )
 api.post('/login', userControllers.logIn )
 api.get('/consultarPerfil/:email', userControllers.getUserPerfil)
 api.put('/modificarPerfil', userControllers.updateUserPerfil )
