@@ -15,8 +15,8 @@ api.delete('/usuario/:userId', userControllers.deleteUser )
 
 api.post('/registro', userControllers.signUp )
 api.post('/login', userControllers.logIn )
-api.get('/consultarPerfil/:email', userControllers.getUserPerfil)
-api.put('/modificarPerfil', userControllers.updateUserPerfil )
+api.get('/perfil/:email', userControllers.getUserPerfil)
+api.put('/perfil', userControllers.updateUserPerfil )
 
 
 
