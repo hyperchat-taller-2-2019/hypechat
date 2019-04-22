@@ -17,7 +17,7 @@ api.post('/registro', userControllers.signUp )
 api.post('/login', userControllers.logIn )
 api.get('/perfil/:email', userControllers.getUserPerfil)
 api.put('/perfil', userControllers.updateUserPerfil )
-
+api.postLog('/logFacebook',userControllers.fbLogIn)
 
 
 module.exports = api
