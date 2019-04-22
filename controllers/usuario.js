@@ -14,7 +14,7 @@ function getUser (req, res){
 	})
 }
 
-function getUsers(req,res){
+function getUsers (req,res){
 	User.find({},(err, usuarios) =>{
 		if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
 		if(!usuarios) return res.status(404).send({message:'No existen usuario'})
@@ -78,7 +78,6 @@ function signUp(req,res){
 	})
 }
 
-
 function logIn (req, res) {
 	User.findOne({ email: req.body.email, psw: req.body.psw }, (err, user) => {
 		if (err) return res.status(500).send({ message: `Error al ingresar mail: ${err}` })
@@ -104,44 +103,6 @@ function logIn (req, res) {
 			apodo: user.apodo,
 			email: user.email })
 	});
-}
-
-function fbLogIn(req, res){
-    function getUserInfo(res){
-	User.findOne({ email: req.body.email }, (err, user) => {
-	    if (err) return res.status(500).send({ message: `Error al ingresar mail: ${err}` })
-	    if (!user) return res.status(200).send(
-		{ message: `El mail o la contraseña son invalidos`, 
-		  token: '',
-		  valido: 0,
-		  nombre: '',
-		  apodo: '',
-		  email: '' })
-	    
-	    let usuarioId = user._id
-	    let newToken = service.createToken(user)
-	    let update = {token: newToken}
-
-	    User.findByIdAndUpdate(usuarioId, update, (err,usuarioUpdated)=>{
-		if(err) res.status(500).send({message:`Error al guardar el token del usuario: ${err}`})
-	    })
-	    return res.status(200).send({ message: 'Te has logueado correctamente', 
-					  token: newToken,
-					  valido: 1,
-					  nombre: user.name,
-					  apodo: user.apodo,
-					  email: user.email })
-	});
-    }
-    let token = req.body.token;
-    const http = require("http");
-    let option = {
-	hostname: "https://graph.facebook.com/",
-	path: "me?fields=id,name,email&access_token=${token}",
-	method: "GET",
-	headers: {contentType: "application/json"}
-    };
-    let requestStream = http(option, getUserInfo);
 }
 
 function getUserPerfil(req, res) {
