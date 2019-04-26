@@ -85,7 +85,7 @@ function logIn (req, res) {
 			{ message: `El mail o la contraseña son invalidos`, 
 			token: '',
 			valido: 0,
-			nombre: '',
+			name: '',
 			nickname: '',
 			email: '' })
 		
@@ -99,7 +99,7 @@ function logIn (req, res) {
 		return res.status(200).send({ message: 'Te has logueado correctamente', 
 			token: newToken,
 			valido: 1,
-			nombre: user.name,
+			name: user.name,
 			nickname: user.nickname,
 			email: user.email })
 	});

@@ -31,7 +31,7 @@ paths:
               token:
                 type: string
                 example: "0000001"
-              nombre:
+              name:
                 type: string
                 example: Lionel Messi
               nickname:
@@ -97,7 +97,7 @@ paths:
               token:
                 type: string
                 example: "0000001"
-              nombre:
+              name:
                 type: string
                 example: Lionel Messi
               nickname:
@@ -193,14 +193,14 @@ definitions:
   datos:
     type: object
     required:
-    - contraseña
+    - psw
     - email
     properties:
       email:
         type: string
         example: hypechat@taller2.com.ar
         description: el mail del usuario
-      contraseña:
+      psw:
         type: string
         example: "12345678"
         description: la contraseña del usuario
@@ -239,7 +239,7 @@ definitions:
       token:
         type: string
         example: "0000001"
-      nombre:
+      name:
         type: string
         example: Lionel Messi
       nickname:
@@ -257,11 +257,11 @@ definitions:
     type: object
     required:
     - nickname
-    - contraseña
+    - psw
     - email
-    - nombre
+    - name
     properties:
-      nombre:
+      name:
         type: string
         description: nombre del usuario
       nickname:
@@ -270,12 +270,12 @@ definitions:
       email:
         type: string
         description: email del usuario
-      contraseña:
+      psw:
         type: string
         description: contraseña del usuario
   inline_response_200_3:
     properties:
-      nombre:
+      name:
         type: string
         description: nombre del usuario consultado
       nickname:
