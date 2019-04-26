@@ -63,11 +63,11 @@ paths:
           schema:
             type: object
             properties:
-              resultado:
+              result:
                 type: integer
                 example: 1
                 description: Indica con un numero si fue registro exitoso o si el usuario ya existe en el sistema
-        400:
+        500:
           description: Request Invalida!
           schema:
             type: object
