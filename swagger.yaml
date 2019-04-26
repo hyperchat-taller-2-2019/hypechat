@@ -24,10 +24,6 @@ paths:
           schema:
             type: object
             properties:
-              valido:
-                type: integer
-                example: 1
-                description: Indica con un numero si las credenciales son validas o si el usuario o password son incorrectas
               token:
                 type: string
                 example: "0000001"
@@ -40,14 +36,21 @@ paths:
               email:
                 type: string
                 example: liomessi@barcelona.com.ar
-        400:
+        404:
           description: Request Invalida!
           schema:
             type: object
             properties:
               message:
                 type: string
-                example: Hubo un error con el servidor!
+                example: La contraseña o usuario son invalidos!
+        500:
+          description: Fallo el server
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
   /signUp:
     post:
       summary: Registra a un usuario nuevo o notifica que ya existe

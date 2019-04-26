@@ -81,13 +81,8 @@ function signUp(req,res){
 function logIn (req, res) {
 	User.findOne({ email: req.body.email, psw: req.body.psw }, (err, user) => {
 		if (err) return res.status(500).send({ message: `Error al ingresar mail: ${err}` })
-		if (!user) return res.status(200).send(
-			{ message: `El mail o la contraseña son invalidos`, 
-			token: '',
-			valido: 0,
-			name: '',
-			nickname: '',
-			email: '' })
+		if (!user) return res.status(404).send(
+			{ message: `El mail o la contraseña son invalidos`})
 		
 		let usuarioId = user._id
 		let newToken = service.createToken(user)
@@ -98,7 +93,6 @@ function logIn (req, res) {
 		})
 		return res.status(200).send({ message: 'Te has logueado correctamente', 
 			token: newToken,
-			valido: 1,
 			name: user.name,
 			nickname: user.nickname,
 			email: user.email })
