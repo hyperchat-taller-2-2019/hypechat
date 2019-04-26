@@ -6,10 +6,11 @@ Trabajo práctico de taller de programación II, grupo 1. Facultad de Ingenierí
 Para poder ejecutar este servidor es necesario tener instalado docker.
 
 ## Ejecución
-Para ejecutar el servidor poner en una terminal:
-$ sudo docker-compose build
+Para ejecutar el servidor poner en una terminal:<br />
+$ sudo docker-compose build<br />
 $ sudo docker-compose up
 
+## API
 Para transformar la documentacion en .yaml a .md se utiliza swagger-markdown disponible en npm.
 
 [API](swagger.md)
