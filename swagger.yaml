@@ -226,7 +226,7 @@ definitions:
         description: url de la nueva foto del usuario
   inline_response_200_1:
     properties:
-      resultado:
+      result:
         type: integer
         example: 1
         description: Indica con un numero si fue registro exitoso o si el usuario ya existe en el sistema
