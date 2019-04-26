@@ -86,7 +86,7 @@ function logIn (req, res) {
 			token: '',
 			valido: 0,
 			nombre: '',
-			apodo: '',
+			nickname: '',
 			email: '' })
 		
 		let usuarioId = user._id
@@ -100,7 +100,7 @@ function logIn (req, res) {
 			token: newToken,
 			valido: 1,
 			nombre: user.name,
-			apodo: user.nickname,
+			nickname: user.nickname,
 			email: user.email })
 	});
 }

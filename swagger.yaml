@@ -34,7 +34,7 @@ paths:
               nombre:
                 type: string
                 example: Lionel Messi
-              apodo:
+              nickname:
                 type: string
                 example: liomessi
               email:
@@ -100,7 +100,7 @@ paths:
               nombre:
                 type: string
                 example: Lionel Messi
-              apodo:
+              nickname:
                 type: string
                 example: liomessi
               email:
@@ -215,7 +215,7 @@ definitions:
       name:
         type: string
         description: nombre nuevo del usuario
-      apodo:
+      nickname:
         type: string
         description: nickname nuevo del usuario
       email:
@@ -242,7 +242,7 @@ definitions:
       nombre:
         type: string
         example: Lionel Messi
-      apodo:
+      nickname:
         type: string
         example: liomessi
       email:
@@ -256,7 +256,7 @@ definitions:
   usuario:
     type: object
     required:
-    - apodo
+    - nickname
     - contraseña
     - email
     - nombre
@@ -264,7 +264,7 @@ definitions:
       nombre:
         type: string
         description: nombre del usuario
-      apodo:
+      nickname:
         type: string
         description: nickname del usuario
       email:
@@ -278,9 +278,9 @@ definitions:
       nombre:
         type: string
         description: nombre del usuario consultado
-      apodo:
+      nickname:
         type: string
-        description: nickname del usuario consultado
+        description: apodo del usuario consultado
       email:
         type: string
         description: email del usuario consultado
