@@ -161,16 +161,16 @@ paths:
           schema:
             type: object
             properties:
-              nombre:
+              name:
                 type: string
                 description: nombre del usuario consultado
-              apodo:
+              nickname:
                 type: string
                 description: nickname del usuario consultado
               email:
                 type: string
                 description: email del usuario consultado
-              foto:
+              photo:
                 type: string
                 description: url de la foto del usuario consultado
         400:

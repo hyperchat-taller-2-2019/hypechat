@@ -105,15 +105,15 @@ function logIn (req, res) {
 	});
 }
 
-function getUserPerfil(req, res) {
+function getUserProfile(req, res) {
 	User.findOne({email: req.params.email}, (err, user) =>{
 		if(err) return res.status(500).send({message: `Error al buscar informacion del usuario: ${err}`})
 		if(!user) return res.status(400).send({message: 'El usuario solicitado no existe'})
 
-		return res.status(200).send({ nombre: user.name,
-			apodo: user.apodo,
+		return res.status(200).send({ name: user.name,
+			nickname: user.apodo,
 			email: user.email,
-			foto: user.photo
+			photo: user.photo
 		})
 	})
 }
