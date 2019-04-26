@@ -123,6 +123,12 @@ paths:
         required: false
         schema:
           $ref: '#/definitions/usuario_1'
+      - in: body
+        tname: token
+        required: true
+        schema:
+          $ref: '#/definitions/token'
+        
       responses:
         200:
           description: Request Exitoso!
