@@ -12,3 +12,11 @@ services:
     image: mongo
     ports:
     - "27018:27017"
+  test:
+    build: .
+    volumes:
+      - ./test:/data
+    ports:
+      - 5000:5000
+    command:
+      npm test

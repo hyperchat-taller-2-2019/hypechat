@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose');
 const service = require('../services')
-const User = require('../models/usuario');
+const User = require('../models/user');
 
 function getUser (req, res){
 	let userId = req.params.userId
