@@ -30,6 +30,7 @@ paths:
           description: Server error
           schema:
             $ref: '#/definitions/Error'
+
   /signUp:
     post:
       summary: Receives user information through the body and registers it as a new user if it doesn't already exists.
@@ -102,6 +103,7 @@ paths:
         500:
           description: Fallo el servidor
           $ref: '#/definitions/Error' 
+
 
     put:
       summary: updates information fields (with exception of the token), of the user identified by the token, provided in the body.

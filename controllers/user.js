@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose');
 const service = require('../services')
-const User = require('../models/usuario');
+const User = require('../models/user');
 
 function getUser (req, res){
 	let userId = req.params.userId
@@ -74,20 +74,15 @@ function signUp(req,res){
 	user.save((err)=>{
 		if(err) return res.status(500).send({message: `Error al crear el usuario: ${err}`})
 		//res.status(200).send({token: service.createToken(user)})
-		res.status(200).send({resultado: 1})
+		res.status(200).send({result: 1})
 	})
 }
 
 function logIn (req, res) {
 	User.findOne({ email: req.body.email, psw: req.body.psw }, (err, user) => {
 		if (err) return res.status(500).send({ message: `Error al ingresar mail: ${err}` })
-		if (!user) return res.status(200).send(
-			{ message: `El mail o la contraseña son invalidos`, 
-			token: '',
-			valido: 0,
-			nombre: '',
-			apodo: '',
-			email: '' })
+		if (!user) return res.status(404).send(
+			{ message: `El mail o la contraseña son invalidos`})
 		
 		let usuarioId = user._id
 		let newToken = service.createToken(user)
@@ -98,30 +93,29 @@ function logIn (req, res) {
 		})
 		return res.status(200).send({ message: 'Te has logueado correctamente', 
 			token: newToken,
-			valido: 1,
-			nombre: user.name,
-			apodo: user.apodo,
+			name: user.name,
+			nickname: user.nickname,
 			email: user.email })
 	});
 }
 
-function getUserPerfil(req, res) {
+function getUserProfile(req, res) {
 	User.findOne({email: req.params.email}, (err, user) =>{
 		if(err) return res.status(500).send({message: `Error al buscar informacion del usuario: ${err}`})
 		if(!user) return res.status(400).send({message: 'El usuario solicitado no existe'})
 
-		return res.status(200).send({ nombre: user.name,
-			apodo: user.apodo,
+		return res.status(200).send({ name: user.name,
+			nickname: user.nickname,
 			email: user.email,
-			foto: user.photo
+			photo: user.photo
 		})
 	})
 }
 
-function updateUserPerfil(req, res){
-	let usuarioToken = req.body.token
+function updateUserProfile(req, res){
+	let userToken = req.body.token
 	let update = req.body
-	User.update({token: usuarioToken}, update, (err,usuarioUpdated)=>{
+	User.update({token: userToken}, update, (err,userUpdated)=>{
 		if(err) res.status(500).send({message:`Error al actualizar el perfil del usuario: ${err}`})
 
 		res.status(200).send({message: 'El perfil se modificó correctamente'})
