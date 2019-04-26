@@ -48,7 +48,7 @@ paths:
               message:
                 type: string
                 example: Hubo un error con el servidor!
-  /registro:
+  /signUp:
     post:
       summary: Registra a un usuario nuevo o notifica que ya existe
       parameters:
@@ -114,7 +114,7 @@ paths:
               message:
                 type: string
                 example: Hubo un error con el servidor!
-  /modificarPerfil:
+  /profile:
     put:
       summary: Envia el token del usuario que quiere modificar los datos del perfil y los datos que quiere modificar.
       parameters:
@@ -140,7 +140,7 @@ paths:
               message:
                 type: string
                 description: se muestra el error que se produjo en el servidor
-  /consultarPerfil/{email}:
+  /profile/:email:
     get:
       summary: Se muestra el perfil del usuario al cual le corresponde el email del path (poner el mail sin las llaves en los costados).
       parameters:
