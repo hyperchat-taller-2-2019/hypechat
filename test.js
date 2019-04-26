@@ -10,8 +10,8 @@ var jsonParser = bodyParser.json()
 var should = require('should');
 var assert = require('assert');
 
-const User = require('./models/usuario');
-const userControllers = require('./controllers/usuario')
+const User = require('./models/user');
+const userControllers = require('./controllers/user')
 
 var sinon = require('sinon');
 
@@ -109,20 +109,5 @@ describe('SERVER Validations', function(){
 			})
 		})
 	})
-
-	describe('login', ()=> {
-    let users;
-    it('should return code 200 and user info', (done)=> {
-	chai.request(url)
-	    .post('/login')
-	    .send({email:"user2@gmail.com", psw: "userPsw"})
-	    .end( function(err, res){
-		expect(res).to.have.status(200);
-		console.log((res.body));
-		expect(res.body).to.have.property('valido').to.be.equal(1);
-		done();
-	    });
-    });
-});
 })
 

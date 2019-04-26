@@ -7,9 +7,9 @@
   },
   "main": "server.js",
   "scripts": {
-    "start": "URL=mongodb+srv://hypechat:hypechat@hypechat-5gtp2.mongodb.net/test?retryWrites=true node server.js",
+    "start": "MONGODB=mongodb+srv://hypechat:hypechat@hypechat-5gtp2.mongodb.net/hypechat?retryWrites=true node server.js",
     "test": "mocha test.js",
-    "start_local": "URL=mongodb://127.0.0.1:27017 nodemon server.js"
+    "start_local": "MONGODB=mongodb://127.0.0.1:27017 nodemon server.js"
   },
   "dependencies": {
     "async": "^2.6.2",

@@ -1,0 +1,307 @@
+---
+swagger: "2.0"
+info:
+  description: API para la app Hypechat de la materia 75.52 Taller de Programacion 2 de la FIUBA
+  version: 1.0.0
+  title: Hypechat API
+host: https://secure-plateau-18239.herokuapp.com/
+schemes:
+- https
+paths:
+  /login:
+    post:
+      tags: [user]
+      summary: Valida al usuario que quiere ingresar a la app
+      parameters:
+      - in: body
+        name: datos
+        required: false
+        schema:
+          $ref: '#/definitions/datos'
+      responses:
+        200:
+          description: Se realizo la request con exito!
+          schema:
+            type: object
+            properties:
+              valido:
+                type: integer
+                example: 1
+                description: Indica con un numero si las credenciales son validas o si el usuario o password son incorrectas
+              token:
+                type: string
+                example: "0000001"
+              nombre:
+                type: string
+                example: Lionel Messi
+              apodo:
+                type: string
+                example: liomessi
+              email:
+                type: string
+                example: liomessi@barcelona.com.ar
+        400:
+          description: Request Invalida!
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Hubo un error con el servidor!
+  /registro:
+    post:
+      summary: Registra a un usuario nuevo o notifica que ya existe
+      parameters:
+      - in: body
+        name: usuario
+        required: false
+        schema:
+          $ref: '#/definitions/usuario'
+      responses:
+        200:
+          description: Request Exitoso!
+          schema:
+            type: object
+            properties:
+              resultado:
+                type: integer
+                example: 1
+                description: Indica con un numero si fue registro exitoso o si el usuario ya existe en el sistema
+        400:
+          description: Request Invalida!
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Hubo un error con el servidor!
+  /logFacebook:
+    post:
+      summary: Envia el token de facebook del usuario que se logueo.
+      parameters:
+      - in: body
+        name: token
+        required: false
+        schema:
+          $ref: '#/definitions/token'
+      responses:
+        200:
+          description: Se realizo la request con exito!
+          schema:
+            type: object
+            properties:
+              valido:
+                type: integer
+                example: 1
+                description: Indica con un numero si las credenciales son validas o si el usuario o password son incorrectas
+              token:
+                type: string
+                example: "0000001"
+              nombre:
+                type: string
+                example: Lionel Messi
+              apodo:
+                type: string
+                example: liomessi
+              email:
+                type: string
+                example: liomessi@barcelona.com.ar
+        400:
+          description: Request Invalida!
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Hubo un error con el servidor!
+  /modificarPerfil:
+    put:
+      summary: Envia el token del usuario que quiere modificar los datos del perfil y los datos que quiere modificar.
+      parameters:
+      - in: body
+        name: usuario
+        required: false
+        schema:
+          $ref: '#/definitions/usuario_1'
+      responses:
+        200:
+          description: Request Exitoso!
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: El perfil se modificó correctamente
+        500:
+          description: Fallo el servidor
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: se muestra el error que se produjo en el servidor
+  /consultarPerfil/{email}:
+    get:
+      summary: Se muestra el perfil del usuario al cual le corresponde el email del path (poner el mail sin las llaves en los costados).
+      parameters:
+      - name: email
+        in: path
+        description: email del usuario del cual se quiere ver el perfil
+        required: true
+        type: string
+      responses:
+        200:
+          description: Request Exitoso!
+          schema:
+            type: object
+            properties:
+              nombre:
+                type: string
+                description: nombre del usuario consultado
+              apodo:
+                type: string
+                description: nickname del usuario consultado
+              email:
+                type: string
+                description: email del usuario consultado
+              foto:
+                type: string
+                description: url de la foto del usuario consultado
+        400:
+          description: email del path no existe.
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: el usuario solicitado no existe.
+        500:
+          description: Fallo el servidor
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: se muestra el error que se produjo en el servidor
+definitions:
+  datos:
+    type: object
+    required:
+    - contraseña
+    - email
+    properties:
+      email:
+        type: string
+        example: hypechat@taller2.com.ar
+        description: el mail del usuario
+      contraseña:
+        type: string
+        example: "12345678"
+        description: la contraseña del usuario
+  usuario_1:
+    type: object
+    required:
+    - token
+    properties:
+      token:
+        type: string
+        description: el token que el server le asigno al hacer login
+      name:
+        type: string
+        description: nombre nuevo del usuario
+      apodo:
+        type: string
+        description: nickname nuevo del usuario
+      email:
+        type: string
+        description: email nuevo del usuario
+      photo:
+        type: string
+        description: url de la nueva foto del usuario
+  inline_response_200_1:
+    properties:
+      resultado:
+        type: integer
+        example: 1
+        description: Indica con un numero si fue registro exitoso o si el usuario ya existe en el sistema
+  inline_response_200:
+    properties:
+      valido:
+        type: integer
+        example: 1
+        description: Indica con un numero si las credenciales son validas o si el usuario o password son incorrectas
+      token:
+        type: string
+        example: "0000001"
+      nombre:
+        type: string
+        example: Lionel Messi
+      apodo:
+        type: string
+        example: liomessi
+      email:
+        type: string
+        example: liomessi@barcelona.com.ar
+  inline_response_200_2:
+    properties:
+      message:
+        type: string
+        description: El perfil se modificó correctamente
+  usuario:
+    type: object
+    required:
+    - apodo
+    - contraseña
+    - email
+    - nombre
+    properties:
+      nombre:
+        type: string
+        description: nombre del usuario
+      apodo:
+        type: string
+        description: nickname del usuario
+      email:
+        type: string
+        description: email del usuario
+      contraseña:
+        type: string
+        description: contraseña del usuario
+  inline_response_200_3:
+    properties:
+      nombre:
+        type: string
+        description: nombre del usuario consultado
+      apodo:
+        type: string
+        description: nickname del usuario consultado
+      email:
+        type: string
+        description: email del usuario consultado
+      foto:
+        type: string
+        description: url de la foto del usuario consultado
+  inline_response_500:
+    properties:
+      message:
+        type: string
+        description: se muestra el error que se produjo en el servidor
+  inline_response_400:
+    properties:
+      message:
+        type: string
+        example: Hubo un error con el servidor!
+  token:
+    type: object
+    required:
+    - token
+    properties:
+      token:
+        type: string
+        example: aB12874gk12sh37901nnlid2
+        description: el token de facebook asignado al usuario
+  inline_response_400_1:
+    properties:
+      message:
+        type: string
+        description: el usuario solicitado no existe.

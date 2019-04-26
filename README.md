@@ -9,3 +9,7 @@ Para poder ejecutar este servidor es necesario tener instalado docker.
 Para ejecutar el servidor poner en una terminal:
 $ sudo docker-compose build
 $ sudo docker-compose up
+
+Para transformar la documentacion en .yaml a .md se utiliza swagger-markdown disponible en npm.
+
+[API](swagger.md)
