@@ -100,7 +100,7 @@ function logIn (req, res) {
 			token: newToken,
 			valido: 1,
 			nombre: user.name,
-			apodo: user.apodo,
+			apodo: user.nickname,
 			email: user.email })
 	});
 }
@@ -111,7 +111,7 @@ function getUserProfile(req, res) {
 		if(!user) return res.status(400).send({message: 'El usuario solicitado no existe'})
 
 		return res.status(200).send({ name: user.name,
-			nickname: user.apodo,
+			nickname: user.nickname,
 			email: user.email,
 			photo: user.photo
 		})
