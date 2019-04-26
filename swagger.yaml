@@ -284,7 +284,7 @@ definitions:
       email:
         type: string
         description: email del usuario consultado
-      foto:
+      photo:
         type: string
         description: url de la foto del usuario consultado
   inline_response_500:
