@@ -64,18 +64,23 @@ function deleteUser (req, res){
 
 
 function signUp(req,res){
-	const user = new User({
+    const user = new User({
 		email: req.body.email,
 		name: req.body.name,
 		psw: req.body.psw,
 		photo : req.body.photo
 	})
 
-	user.save((err)=>{
-		if(err) return res.status(500).send({message: `Error al crear el usuario: ${err}`})
-		//res.status(200).send({token: service.createToken(user)})
-		res.status(200).send({result: 1})
-	})
+    user.save((err)=>{
+	if(err) return res.status(500).send({message: `Error al crear el usuario: ${err}`})
+	//res.status(200).send({token: service.createToken(user)})
+	res.status(200).send(
+	    { name: user.name,
+	      nickname: user.nickname,
+	      email: user.email,
+	      photo: user.photo
+	    })
+    })
 }
 
 function logIn (req, res) {
@@ -91,7 +96,7 @@ function logIn (req, res) {
 		User.findByIdAndUpdate(usuarioId, update, (err,usuarioUpdated)=>{
 			if(err) res.status(500).send({message:`Error al guardar el token del usuario: ${err}`})
 		})
-		return res.status(200).send({ message: 'Te has logueado correctamente', 
+		return res.status(200).send({ 
 			token: newToken,
 			name: user.name,
 			nickname: user.nickname,
