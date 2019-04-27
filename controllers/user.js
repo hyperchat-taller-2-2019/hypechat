@@ -135,6 +135,6 @@ module.exports={
 	deleteUser,
 	signUp,
 	logIn,
-	getUserPerfil,
-	updateUserPerfil
+	getUserProfile,
+	updateUserProfile
 }
