@@ -3,6 +3,7 @@
 const mongoose = require('mongoose');
 const service = require('../services')
 const User = require('../models/user');
+const logger = require('./utils/logger');
 
 function getUser (req, res){
 	let userId = req.params.userId
@@ -23,8 +24,8 @@ function getUsers (req,res){
 }
 
 function saveUser (req, res){
-	console.log('POST /api/usuario')
-	console.log(req.body)
+	//console.log('POST /api/usuario')
+	//console.log(req.body)
 	
 	let usuario = new User()
 	usuario.name = req.body.name
@@ -67,6 +68,7 @@ function signUp(req,res){
 	const user = new User({
 		email: req.body.email,
 		name: req.body.name,
+		nickname: user.nickname,
 		psw: req.body.psw,
 		photo : req.body.photo
 	})
@@ -130,6 +132,6 @@ module.exports={
 	deleteUser,
 	signUp,
 	logIn,
-	getUserPerfil,
-	updateUserPerfil
+	getUserProfile,
+	updateUserProfile
 }
