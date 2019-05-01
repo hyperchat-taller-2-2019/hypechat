@@ -22,7 +22,7 @@ paths:
           description: Se realizo la request con exito!
           schema:
             $ref: '#/definitions/user'
-        400:
+        404:
           description: Bad login information
           schema:
             $ref: '$/definitions/Error'
@@ -45,15 +45,11 @@ paths:
           description: Succesful request
           schema:
             $ref: '#/definitions/user'
-
-        400:
-          description: Bad signup information
-          schema:
-            $ref: '$/definitions/Error'
         500:
           description: Server error
           schema:
             $ref: '#/definitions/Error'
+  
   /loginFacebook:
     post:
       summary: sends user's facebook token for login.
@@ -76,15 +72,10 @@ paths:
           description: Server error
           schema:
             $ref: '#/definitions/Error'
-  /user/{userId}:
-    parameters:
-      - in: path
-        name: userId
-        required: true
-        type: string
-        allowEmptyValue: false
+  
+  /profile/{userEmail}:
     get:
-      summary: Se muestra el perfil del usuario al cual le corresponde el email del path (poner el mail sin las llaves en los costados).
+      summary: Se muestran los datos (sin pws y token) del usuario al cual le corresponde el email del path (poner el mail sin las llaves en los costados).
       parameters:
       - name: email
         in: path
@@ -104,7 +95,7 @@ paths:
           description: Fallo el servidor
           $ref: '#/definitions/Error' 
 
-
+  /profile:
     put:
       summary: updates information fields (with exception of the token), of the user identified by the token, provided in the body.
       parameters:
@@ -123,27 +114,7 @@ paths:
           description: Fallo el servidor
           schema:
             $ref: '#/definitions/Error' 
-  /consultarPerfil/{email}:
-    get:
-      summary: Se muestra el perfil del usuario al cual le corresponde el email del path (poner el mail sin las llaves en los costados).
-      parameters:
-      - name: email
-        in: path
-        description: email del usuario del cual se quiere ver el perfil
-        required: true
-        type: string
-      responses:
-        200:
-          description: Request Exitoso!
-          schema:
-            $ref: '#/definitions/user'
-        400:
-          description: email del path no existe.
-          schema:
-            $ref: '#/definitions/Error' 
-        500:
-          description: Fallo el servidor
-          $ref: '#/definitions/Error' 
+
 definitions:
   user:
     type: object
