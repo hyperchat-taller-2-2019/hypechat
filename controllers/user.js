@@ -16,10 +16,10 @@ function getUser (req, res){
 }
 
 function getUsers (req,res){
-	User.find({},(err, usuarios) =>{
+	User.find({},(err, users) =>{
 		if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
-		if(!usuarios) return res.status(404).send({message:'No existen usuario'})
-		return res.status(200).send({usuario: usuarios})
+		if(!users) return res.status(404).send({message:'No existen usuario'})
+		return res.status(200).send({user: users})
 	})
 }
 
@@ -147,7 +147,7 @@ module.exports={
 	getUser,
 	getUsers,
 	saveUser,
-	updateUser,
+	updateUser2,
 	deleteUser,
 	signUp,
 	logIn,

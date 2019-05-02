@@ -1,113 +1,39 @@
+//During the test the env variable is set to test
+process.env.NODE_ENV = 'test';
+
+let mongoose = require("mongoose");
+let User = require('./models/user');
+
+//Require the dev-dependencies
 let chai = require('chai');
 let chaiHttp = require('chai-http');
+let server = require('./server');
+let should = chai.should();
 
-const expect = require('chai').expect;
-chai.use(chaiHttp)
 const url= 'http://localhost:5000';
-const bodyParser = require('body-parser')
-var jsonParser = bodyParser.json()
 
-var should = require('should');
-var assert = require('assert');
 
-const User = require('./models/user');
-const userControllers = require('./controllers/user')
-
-var sinon = require('sinon');
-
-describe("User validations", function(){
-	
-	describe('User creation', function(){
-		
-		it('should be an object', function(){
-			let user = new User({
-				email: 'user@gmail.com',
-				name: 'userName',
-				psw: 'psw'
-			})
-			assert(user!= undefined);
-		});
-
-		it('should have a property "email" with value user@gmail.com', function(){
-			let user = new User({
-				email: 'user@gmail.com',
-				name: 'userName',
-				psw: 'psw'
-			})
-			user.should.have.property("email").eql('user@gmail.com');
-		});
-
-		it('should have a property "psw" with value "userPsw"', function(){
-			let user = new User({
-				email: 'user@gmail.com',
-				name: 'userName',
-				psw: 'userPsw'
-			})
-			user.should.have.property("psw").eql('userPsw');
-		});
-
-	})
-})
-
-describe('User Controllers Validations', function (){
-	describe('signUp user', function(){
-		//HAY QUE USAR SINON
+chai.use(chaiHttp);
+//Our parent block
+describe('Users', () => {
+    beforeEach((done) => { //Before each test we empty the database
+        User.remove({}, (err) => { 
+           done();           
+        });        
+    });
 /*
+  * Test the /GET route
+  */
+  describe('/GET user', () => {
+      it('it should GET all the books', (done) => {
+        chai.request(url)
+            .get('/user')
+            .end((err, res) => {
+                  res.should.have.status(200);
+                  res.body.should.be.eql({user: []})
+              done();
+            });
+      });
+  });
 
-		it('user signs up OK', function(){
-			let res = {"status":0};
-			let req = {"body": {
-			"email": 'user@gmail.com',
-			"name": 'userName',
-			"psw": 'userPsw'
-			}}
-			userControllers.signUp(req, res)
-			let user2 = User.findOne({email: 'user@gmail.com', psw: 'userPsw'}, (err, user) =>{
-        		assert(user!= undefined);
-        	})
-        	//console.log(err)
-		})
-
-		afterEach(function () { //esto se ejecuta despues de cada it
-        	User.findOne({email: 'user2@gmail.com', psw: 'userPsw'}, (err, user) =>{
-        		assert(user!= undefined);
-        		console.log('hola1')
-        	})
-    	});
-
-		it('user signs up with an alredy existent name and password', function (){
-			let res = {"status":0};
-			let req = {"body": {
-			"email": 'user2@gmail.com',
-			"name": 'userName',
-			"psw": 'userPsw'
-			}}
-			userControllers.signUp(req, res);
-		})*/
-	});
-})
-
-
-describe('SERVER Validations', function(){
-	let server = require('./server');
-
-	describe('POST /registro', function(){
-		it('Correct sing up', function(done){
-			chai.request(url)
-			.post('./registro')
-			.send({
-				"email": 'user2@gmail.com',
-				"name": 'userName',
-				"psw": 'userPsw'
-			})
-			.end((err, res) => {
-				console.log(err)
-				console.log(res)
-				assert(err != undefined);
-				//res.status.should.be.eql(200);
-				done();
-			})
-		})
-	})
-})
-
+});
