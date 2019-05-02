@@ -143,9 +143,10 @@ updates password of the user identified by the token, provided in the body.
 
 | Name | Type | Description | Required |
 | ---- | ---- | ----------- | -------- |
+| psw | string | user password | Yes |
 | name | string | user name | No |
 | nickname | string | user nickname | No |
-| email | string | null | No |
+| email | string | null | Yes |
 | photo | string | url de la nueva foto del usuario | No |
 
 #### logInCredentials

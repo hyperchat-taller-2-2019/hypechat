@@ -157,9 +157,12 @@ definitions:
   signUpCredentials:
     type: object
     required:
-      -psw
-      -email
+    - psw
+    - email
     properties:
+      psw:
+        type: string
+        description: user password
       name:
         type: string
         description: user name
