@@ -84,7 +84,7 @@ Se muestran los datos (sin pws y token) del usuario al cual le corresponde el em
 | ---- | ----------- | ------ |
 | 200 | Request Exitoso! | [user](#user) |
 | 400 | email del path no existe. | [Error](#error) |
-| 500 | Fallo el servidor |  |
+| 500 | Fallo el servidor | [Error](#error) |
 
 ### /profile
 

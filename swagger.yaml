@@ -93,7 +93,8 @@ paths:
             $ref: '#/definitions/Error' 
         500:
           description: Fallo el servidor
-          $ref: '#/definitions/Error' 
+          schema:
+            $ref: '#/definitions/Error' 
 
   /profile:
     put:
