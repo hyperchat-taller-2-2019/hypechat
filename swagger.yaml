@@ -113,6 +113,26 @@ paths:
         500:
           description: Fallo el servidor
           schema:
+            $ref: '#/definitions/Error'
+
+  /psw:
+    put:
+      summary: updates password of the user identified by the token, provided in the body.
+      parameters:
+      - in: body
+        name: user
+        required: false
+        schema:
+          $ref: '#/definitions/user'
+      responses:
+        200:
+          description: Successful request
+          schema:
+            type: string
+            description: user password successfully updated
+        500:
+          description: Fallo el servidor
+          schema:
             $ref: '#/definitions/Error' 
 
 definitions:

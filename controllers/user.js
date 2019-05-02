@@ -19,14 +19,11 @@ function getUsers (req,res){
 	User.find({},(err, usuarios) =>{
 		if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
 		if(!usuarios) return res.status(404).send({message:'No existen usuario'})
-	res.status(200).send({usuario: usuarios})
+		return res.status(200).send({usuario: usuarios})
 	})
 }
 
-function saveUser (req, res){
-	//console.log('POST /api/usuario')
-	//console.log(req.body)
-	
+function saveUser (req, res){	
 	let usuario = new User()
 	usuario.name = req.body.name
 	usuario.psw = req.body.psw
@@ -39,7 +36,7 @@ function saveUser (req, res){
 	})
 }
 
-function updateUser (req, res){
+function updateUser2 (req, res){
 	let usuarioId = req.params.userId
 	let update = req.body
 
@@ -133,16 +130,16 @@ function getUserProfile(req, res) {
 	})
 }
 
-function updateUserProfile(req, res){
+function updateUser(req, res){
 	let userToken = req.body.token
 	let update = req.body
 	User.update({token: userToken}, update, (err,userUpdated)=>{
 		if(err) {
-			logger.error(`updateUserProfile - Error (500) al actualizar el perfil del usuario: ${err}`)
-			res.status(500).send({message:`updateUserProfile - Error al actualizar el perfil del usuario: ${err}`})}
+			logger.error(`updateUser2 - Error (500) al actualizar el usuario: ${err}`)
+			res.status(500).send({message:`Error al actualizar el usuario: ${err}`})}
 
-		logger.info(`updateUserProfile - El perfil del usuario ${userUpdated.email} se modificó correctamente`)
-		res.status(200).send({message: 'El perfil se modificó correctamente'})
+		logger.info(`updateUser2 - El usuario ${userUpdated.email} se modificó correctamente`)
+		res.status(200).send({message: 'El usuario se modificó correctamente'})
 	})
 }
 
@@ -155,5 +152,5 @@ module.exports={
 	signUp,
 	logIn,
 	getUserProfile,
-	updateUserProfile
+	updateUser
 }

@@ -106,6 +106,26 @@ updates information fields (with exception of the token), of the user identified
 | 200 | Successful request | string |
 | 500 | Fallo el servidor | [Error](#error) |
 
+### /psw
+
+#### PUT
+##### Summary:
+
+updates password of the user identified by the token, provided in the body.
+
+##### Parameters
+
+| Name | Located in | Description | Required | Schema |
+| ---- | ---------- | ----------- | -------- | ---- |
+| user | body |  | No | [user](#user) |
+
+##### Responses
+
+| Code | Description | Schema |
+| ---- | ----------- | ------ |
+| 200 | Successful request | string |
+| 500 | Fallo el servidor | [Error](#error) |
+
 ### Models
 
 
