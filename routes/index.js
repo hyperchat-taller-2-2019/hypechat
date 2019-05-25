@@ -20,14 +20,14 @@ api.put('/profile', userControllers.updateUser )
 api.put('/psw', userControllers.updateUser )
 api.post('/loginFacebook', (req,res) => {res.status(500).send({message: 'not implemented yet'})})
 
-api.get('/organizaciones/:userEmail',userControllers.getUserOrganizations)
-api.get('/msjPrivados',userControllers.getPrivateMsj)
-api.get('/organizationID_valid/:organizacionID',userControllers.is_organizationId_valid)
-api.post('/organizacion',userControllers.createOrganization)
-api.post('/usuarioOrganizacion',userControllers.addUserToOrganization)
-api.get('/organizacion/:token/:organizacion_id',userControllers.getInfoOrganization)
-api.put('/nombreOrganizacion',userControllers.updateNameOrganization)
-api.put('/passwordOrganizacion',userControllers.updatePasswordOrganization)
+api.get('/organizations/:userEmail',userControllers.getUserOrganizations)
+api.get('/privateMsj',userControllers.getPrivateMsj)
+api.get('/idOrganizationValid/:organizationID',userControllers.isOrganizationIDValid)
+api.post('/organization',userControllers.createOrganization)
+api.post('/userOrganization',userControllers.addUserToOrganization)
+api.get('/organization/:token/:organizationID',userControllers.getInfoOrganization)
+api.put('/nameOrganization',userControllers.updateNameOrganization)
+api.put('/pswOrganization',userControllers.updatePasswordOrganization)
 
 
 
