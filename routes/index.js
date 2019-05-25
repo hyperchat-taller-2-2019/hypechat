@@ -21,7 +21,7 @@ api.put('/psw', userControllers.updateUser )
 api.post('/loginFacebook', (req,res) => {res.status(500).send({message: 'not implemented yet'})})
 
 api.get('/organizaciones/:userEmail',userControllers.getUserOrganizations)
-api.get('/canalesYmsjPrivados',userControllers.getPrivateMsj)
+api.get('/msjPrivados',userControllers.getPrivateMsj)
 api.get('/organizationID_valid/:organizacionID',userControllers.is_organizationId_valid)
 api.post('/organizacion',userControllers.createOrganization)
 api.post('/usuarioOrganizacion',userControllers.addUserToOrganization)

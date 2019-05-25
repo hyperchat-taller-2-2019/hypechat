@@ -170,10 +170,10 @@ function getPrivateMsj(req, res){
 		PrivateMsj.find({organizationID: id_organization, email_user2: userId}, (err, msjs2)=>{
 			if (err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
 			let allMsj = []
-			msj.forEach(element => {
+			msjs.forEach(element => {
 				allMsj.push(element.email_user2)
 			});
-			msj2.forEach(element => {
+			msjs2.forEach(element => {
 				allMsj.push(element.email_user1)
 			});
 			return res.status(200).send({msjs: allMsj})
