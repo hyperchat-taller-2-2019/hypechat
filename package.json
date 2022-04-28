@@ -12,7 +12,7 @@
     "start_local": "MONGODB=mongodb://127.0.0.1:27017 nodemon server.js"
   },
   "dependencies": {
-    "async": "^2.6.2",
+    "async": "^2.6.4",
     "await": "^0.2.6",
     "body-parser": "^1.18.3",
     "chai": "^4.2.0",
